@@ -2,7 +2,7 @@
 # Cloud Computing Homework 2
 
 ## Overview
-This repository contains solutions to Homework 2 for the Cloud Computing course. The assignment focuses on containerization, deployment, and horizontal scaling of applications using Docker and Kubernetes. The solutions are divided into three parts: Docker, Kubernetes, and theoretical questions.
+This repository contains files for kubernetes/docker lab. The assignment focuses on containerization, deployment, and horizontal scaling of applications using Docker and Kubernetes. The solutions are divided into two parts: Docker, Kubernetes.
 
 ---
 
@@ -86,15 +86,6 @@ chmod +x kubernetes.sh
 # Run the script
 ./kubernetes.sh
 ```
-
----
-
-## Part 3: Theoretical Questions
-### Problem
-**Prove or disprove the claim regarding the optimality of the LS algorithm under specific conditions.**
-
-- Analyze and validate the professor's claim based on the provided constraints.
-- Provide mathematical proof or counterexamples as required.
 
 ---
 
