@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sectionbv1
+spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 10%
+      maxSurge: 30%
+  selector:
+    matchLabels:
+      run: sectionbv1-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: sectionbv1-app
+    spec:
+      containers:
+      - name: sectionbv1
+        image: haimcohen96/sectionb:version1
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: 20m
+          requests:
+            cpu: 15m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sectionbv1
+  labels:
+    run: sectionbv1-app
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    nodePort: 30555
+  selector:
+    run: sectionbv1-app
+---
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: sectionbv1
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: sectionbv1
+  minReplicas: 1
+  maxReplicas: 100
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 15
+
